@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda de Versículos</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #bible-input, #search-button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #search-button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+        #search-button:hover {
+            background-color: #45a049;
+        }
+        #bible-text {
+            width: 80%;  /* Ajuste de ancho para el contenedor */
+            max-width: 600px;  /* Ancho máximo para mantener la legibilidad */
+            height: 200px;  /* Altura fija del contenedor */
+            overflow-y: auto;  /* Activar desplazamiento vertical */
+            background-color: #fff;  /* Fondo blanco para el texto */
+            border: 1px solid #ccc;  /* Borde sutil */
+            padding: 10px;  /* Espaciado interno */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra suave */
+            margin-top: 20px;  /* Espacio sobre el contenedor de texto */
+            position: relative; /* Posicionamiento relativo */
+            white-space: pre-wrap;  /* Asegura que los espacios y saltos de línea se respeten */
+            overflow-wrap: break-word; /* Asegura que las palabras no se desborden */
+            box-sizing: border-box; /* El padding y el borde se incluyen en el ancho/altura */
+        }
+    </style>
+</head>
+<body>
+<div>
+  <input type="text" id="bible-input" placeholder="Escribe 'Génesis 1:1-3'" />
+  <button id="search-button">Buscar Versículos</button>
+  <div id="bible-text"></div>
+</div>
+
+<script>
+        document.getElementById('search-button').addEventListener('click', function() {
+    const verseRef = document.getElementById('bible-input').value.trim();
+    if (verseRef) {
+        getBibleText(verseRef);
+    } else {
+        alert('Por favor ingresa una referencia válida.');
+    }
+});
+
+async function getBibleText(verseRef) {
+    const parts = verseRef.split(' ');
+    if (parts.length < 2) {
+        document.getElementById('bible-text').innerText = "Por favor, ingresa una referencia completa como 'Génesis 1:1-3'.";
+        return;
+    }
+    const book = parts[0].toLowerCase(); // Asegúrate de que el nombre del libro esté en el formato correcto
+    const chapterAndVerse = parts[1].split(':');
+    if (chapterAndVerse.length < 2) {
+        document.getElementById('bible-text').innerText = "Asegúrate de incluir el capítulo y versículos como '1:1-3'.";
+        return;
+    }
+    const chapter = chapterAndVerse[0];
+    const verses = chapterAndVerse[1];
+    const url = `https://bible-api.deno.dev/api/read/rv1960/${book}/${chapter}/${verses}`;
+    console.log(url); // Depuración para verificar la URL
+
+    try {
+        const response = await fetch(url);
+        console.log(response); // Depurar la respuesta bruta
+        const data = await response.json();
+        console.log(data); // Depurar los datos JSON
+        if (data && data.length > 0) {
+            const text = data.map(verseObj => `${verseObj.number}. ${verseObj.verse}`).join('\n\n');
+            document.getElementById('bible-text').innerText = ''; // Limpiar el texto anterior
+            animateText(text, 0);
+        } else {
+            document.getElementById('bible-text').innerText = "Versículo no encontrado.";
+        }
+    } catch (error) {
+        console.error(error); // Depurar errores
+        document.getElementById('bible-text').innerText = "Error al cargar el versículo: " + error.message;
+    }
+}
+
+function animateText(text, index) {
+    const bibleTextElement = document.getElementById('bible-text');
+    if (index < text.length) {
+        bibleTextElement.innerHTML += text.charAt(index);
+        setTimeout(function() {
+            animateText(text, index + 1);
+        }, 50); // Velocidad de animación ajustada aquí
+    }
+}
+
+
+    </script>
+</body>
+</html>

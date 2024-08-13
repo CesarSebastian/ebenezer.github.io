@@ -1,0 +1,53 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #bible-input, #search-button, #clear-button {
+
+            padding: 10px;
+            margin: 20px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+        #bible-input:focus {
+            outline: none;
+            border-color: #4A90E2; /* Cambia el color del borde a un azul más llamativo */
+            box-shadow: 0 0 15px rgba(74, 144, 226, 0.75); /* Añade un brillo alrededor del campo */
+        }
+        #search-button,#clear-button {
+            outline: none;
+            cursor: pointer;
+            background-color: #95b8f6;
+            color: white;
+        }
+        #search-button:hover,#clear-button:hover {
+            background-color: #64b5f6;
+        }
+        #bible-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px; /* Tamaño más grande de la fuente */
+            font-weight: 700; /* Hacer la fuente más gruesa */
+            width: 80%;  /* Ajuste de ancho para el contenedor */
+            max-width: 80%;  /* Ancho máximo para mantener la legibilidad */
+            height: 90%;  /* Altura fija del contenedor */
+            overflow-y: auto;  /* Activar desplazamiento vertical */
+            /*background-color: #F8FFED;   Fondo blanco para el texto */
+            background-color: rgba(248, 255, 237, 0.5);
+            border: 1px solid #ccc;  /* Borde sutil */
+            border-radius: 10px;
+            padding: 10px;  /* Espaciado interno */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra suave */
+            margin-top: 20px;  /* Espacio sobre el contenedor de texto */
+            position: relative; /* Posicionamiento relativo */
+            white-space: pre-wrap;  /* Asegura que los espacios y saltos de línea se respeten */
+            overflow-wrap: break-word; /* Asegura que las palabras no se desborden */
+            box-sizing: border-box; /* El padding y el borde se incluyen en el ancho/altura */
+            scrollbar-width: thin;          /* "auto" or "thin" */
+            scrollbar-color: #95b8f6 #f4f4f4    ;
+
+        }
