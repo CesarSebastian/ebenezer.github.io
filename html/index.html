@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Citas de Fe</title>
@@ -8,10 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body background="background.jpeg">
-    <div>
-        <input type="text" id="bible-input" placeholder="ejem 'genesis 1:1-3'" /></p>
-        <button id="search-button">Buscar Versículos</button></p>
-        <button id="clear-button" style="display: none;">Limpiar</button>
+    <div class="top-controls">
+        <input type="text" id="bible-input" placeholder="ejem 'genesis 1:1-3'">
+
+        <div class="button-row">
+            <button id="search-button">Buscar Versículos</button>
+            <button id="clear-button" style="display: none;">Limpiar</button>
+        </div>
     </div>
 
     <div id="bible-text"></div>

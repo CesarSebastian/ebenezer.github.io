@@ -1,12 +1,24 @@
         body {
-            font-family: Arial, sans-serif;
+            /*font-family: Arial, sans-serif;*/
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            margin: 0;
+            padding: 20px;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
         }
+
+        .top-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         #bible-input, #search-button, #clear-button {
 
             padding: 10px;
@@ -40,7 +52,6 @@
             background-color: rgba(248, 255, 237, 0.5);
             border: 1px solid #ccc;  /* Borde sutil */
             border-radius: 10px;
-            padding: 10px;  /* Espaciado interno */
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra suave */
             margin-top: 20px;  /* Espacio sobre el contenedor de texto */
             position: relative; /* Posicionamiento relativo */
@@ -49,5 +60,8 @@
             box-sizing: border-box; /* El padding y el borde se incluyen en el ancho/altura */
             scrollbar-width: thin;          /* "auto" or "thin" */
             scrollbar-color: #95b8f6 #f4f4f4    ;
+            flex: 1; /* Este elemento ocupa todo el espacio restante */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
 
         }

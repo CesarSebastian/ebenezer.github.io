@@ -5,9 +5,11 @@ document.getElementById('search-button').addEventListener('click', function() {
     } else {
         alert('Por favor ingresa una referencia válida.');
     }
+
 });
 
 async function getBibleText(verseRef) {
+    const search_b = document.getElementById('search-button');
     const parts = verseRef.split(' ');
     if (parts.length < 2) {
         document.getElementById('bible-text').innerText = "Por favor, ingresa una referencia completa como 'Génesis 1:1-3'.";
@@ -53,10 +55,20 @@ function animateText(text, index) {
         // Mostrar el botón de limpiar una vez que termine la animación
         document.getElementById('clear-button').style.display = 'inline-block';
     }
+
 }
 
 // Función para limpiar el texto
 document.getElementById('clear-button').addEventListener('click', function() {
     document.getElementById('bible-text').innerHTML = ''; // Limpiar el texto del contenedor
     this.style.display = 'none'; // Ocultar el botón nuevamente
+});
+
+window.addEventListener('keydown', function(event) {
+    const verseRef = document.getElementById('bible-input').value.trim();
+    if (verseRef) {
+        getBibleText(verseRef);
+    } else {
+        //alert('Por favor ingresa una referencia válida.');
+    }
 });
